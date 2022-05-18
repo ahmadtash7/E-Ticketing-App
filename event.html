@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Details</title>
+<style>
+.item1 { grid-area: header; }
+.item2 { grid-area: image; }
+.item3 { grid-area: info; }
+
+.heading{
+  background-color:black;
+  color:white;
+  font-size:30px;
+  width:99%;
+  height:50px;
+}
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'image image image info info info'
+    'image image image info info info';
+  gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+</style>
+</head>
+<body>
+<div class="heading">
+NUST E-TICKETING
+<div style="margin-left:20%;height:30%;">
+  <button  onclick="">Home</button>
+  <button onclick="">About Us</button>
+  <button onclick="">Contact Us</button>
+  <button onclick="">View Bag</button>
+  <button onclick="">Societies</button>
+  <input class= "navsearch" type="text" placeholder="Search..." name="search"></div>
+</div>
+</div>
+<div class="grid-container">
+  <div class="item1">DETAILS</div>
+  <div class="item2">
+    <img src="down.jpg" width:50% height:50%>
+  </div>
+  <div class="item3">
+    <p>EVENT WILL BE .....
+    <br>yeyeyeye
+  <br>nnonononon
+</p>
+<button type="button"style= "widtth:50%; height:50px" onclick=""></a>BUY NOW</button>
+  </div>
+</div>
+
+</body>
+</html>
