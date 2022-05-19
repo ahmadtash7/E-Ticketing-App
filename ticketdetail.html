@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+.item3 { grid-area: tick1; }
+.item4 { grid-area: menu2; }
+.item5 { grid-area: tick2; }
+.heading{
+  background-color:black;
+  color:white;
+  font-size:30px;
+  width:99%;
+  height:50px;
+}
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu tick1 tick1 tick1 tick1 tick1'
+    'menu2 tick2 tick2 tick2 tick2 tick2';
+  gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+button{
+  width:100px;
+  height:80 px;
+}
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+</style>
+</head>
+<body>
+  <div class="heading">
+  NUST E-TICKETING
+  <div  style="margin-left:20%;height:;">
+    <button   onclick="">Home</button>
+    <button onclick="">About Us</button>
+    <button onclick="">Contact Us</button>
+    <button onclick="">View Bag</button>
+    <button onclick="">Societies</button>
+    <input class= "navsearch" type="text" placeholder="Search..." name="search"></div>
+  </div>
+  </div>
+<div class="grid-container">
+  <div class="item1">TICKET DETAILS</div>
+  <div class="item2">TICKET 1</div>
+  <div class="item3">
+    <div>
+<TABLE>
+<TR>
+  <td>NAME:</td>
+  <td></td>
+</TR>
+<TR>
+  <td>CMS:</td>
+  <td></td>
+</TR>
+<TR>
+  <td>CONTACT:</td>
+  <td></td>
+</TR>
+<TR>
+  <td>EMAIL:</td>
+  <td></td>
+</TR>
+</TABLE>
+    </div>
+  </div>
+  <div class="item4">TICKET 2</div>
+  <div class="item5">
+    <div>
+  <TABLE>
+  <TR>
+  <td>NAME:</td>
+  <td></td>
+  </TR>
+  <TR>
+  <td>CMS:</td>
+  <td></td>
+  </TR>
+  <TR>
+  <td>CONTACT:</td>
+  <td></td>
+  </TR>
+  <TR>
+  <td>EMAIL:</td>
+  <td></td>
+  </TR>
+  </TABLE>
+    </div>
+  </div>
+
+  </div>
+
+</div>
+<div>
+  <table>
+    <tr>
+      <button type="button" name="button">+</button>QUANTITY<button>-</button>
+      </tr>
+      <br>
+      <tr>
+        TOTAL:
+      </tr>
+      <br>
+      <tr>
+        <button type="button" onclick=""> ADD TO BAG</button>
+      </tr>
+
+  </table>
+</div>
+
+</body>
+</html>
