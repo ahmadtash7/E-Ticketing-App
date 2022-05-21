@@ -1,5 +1,8 @@
 from django.db import models
-
+from django.conf import settings
+import os
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
 # Create your models here.
 
 
@@ -19,7 +22,7 @@ class Event(models.Model):
     tickets_sold = models.IntegerField()
     tickets_left = models.IntegerField()
     ticket_price = models.IntegerField()
-
+    event_poster = models.ImageField(default= settings.STATIC_URL+ 'images/down.jpg', upload_to='images/')
 
     def __str__(self):
         return f'{self.name} {self.organizer}'
