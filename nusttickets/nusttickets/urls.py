@@ -15,14 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import Index
+from .views import Index,Events, Tickets,SignUp
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+
+
 
 urlpatterns = [
 path('accounts/', include('accounts.urls')),
 path('events/', include('events.urls')),
     path('admin/', admin.site.urls),
-    path('', Index)
+    path('', Index),
+    path('event/<str:oid>', Events, name='event'),
+path('ticketDetails/', Tickets, name='buy'),
+path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+path('logout/', auth_views.LogoutView.as_view(),name='logout'),
+path('signup/', SignUp.as_view(), name='signup'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,7 +10,7 @@ class User_Account(models.Model):
     last_name = models.CharField(max_length=200)
     email_address = models.EmailField(max_length=200)
     contact_number = PhoneNumberField(default='+920000000000')
-
+    password = models.CharField(max_length=200)
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.cms_id}'
 
