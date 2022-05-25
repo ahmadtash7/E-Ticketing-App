@@ -61,9 +61,17 @@
             {{event_data.tickets_left}}
             <br />
           </p>
+
+          {% if user.is_authenticated %}
           <button type="button" style="width: 50%; height: 50px" onclick="">
             <a href="{% url 'buy' %}">BUY NOW</a>
           </button>
+          {% else %}
+          <button type="button" style="width: 50%; height: 50px" onclick="">
+            <a href="{% url 'signup' %}">BUY NOW</a>
+          </button>
+
+          {% endif %}
         </div>
       </div>
 

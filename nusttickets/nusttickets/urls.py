@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import Index,Events, Tickets,SignUp,LoginView
+from .views import Index,Events, Tickets,SignUp,LoginView,LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -30,7 +30,7 @@ path('events/', include('events.urls')),
     path('event/<str:oid>', Events, name='event'),
 path('ticketDetails/', Tickets, name='buy'),
 path('login/', LoginView, name='login'),
-path('logout/', auth_views.LogoutView.as_view(),name='logout'),
+path('logout/', LogoutView,name='logout'),
 path('signup/', SignUp, name='signup'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

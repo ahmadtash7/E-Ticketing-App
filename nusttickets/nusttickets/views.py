@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from accounts.forms import UserForm
@@ -29,8 +29,9 @@ def Events(request, oid):
     return render(request,'event_page.html', context={'event_data':event_data})
 
 def Tickets(request):
-
-    return render(request, 'ticketdetails.html')
+    current_user = request.user
+    print(current_user)
+    return render(request, 'ticketdetails.html',context={'current_user':current_user})
 
 
 
@@ -42,13 +43,13 @@ def SignUp(request):
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             ######################### mail system ####################################
-            # htmly = get_template('Email.html')
-            # d = { 'username': username }
-            # subject, from_email, to = 'welcome', 'bhattiboy01@gmail.com', email
-            # html_content = htmly.render(d)
-            # msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-            # msg.attach_alternative(html_content, "text/html")
-            # msg.send()
+            htmly = get_template('Email.html')
+            d = { 'username': username }
+            subject, from_email, to = 'welcome', 'bhattiboy01@gmail.com', email
+            html_content = htmly.render(d)
+            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
             ##################################################################
             messages.success(request, f'Your account has been created ! You are now able to log in')
             return redirect('login')
@@ -72,3 +73,8 @@ def LoginView(request):
             messages.info(request, f'account does not exist please sign up')
     form = AuthenticationForm()
     return render(request, 'login.html', {'form':form, 'title':'log in'})
+
+
+def LogoutView(request):
+    logout(request)
+    return redirect('index')
