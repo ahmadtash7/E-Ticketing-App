@@ -32,48 +32,23 @@ def Tickets(request):
 
     return render(request, 'ticketdetails.html')
 
-# Create your views here.
 
-# class SignUp(CreateView):
-#     form_class = forms.UserForm
-#     success_url = reverse_lazy('login')
-#     template_name = 'signup.html'
-#
-#
-# def LoginView(request):
-#     if request.method == 'POST':
-#
-#         # AuthenticationForm_can_also_be_used__
-#
-#         cms = request.POST['username']
-#         password = request.POST['password']
-#         user = authenticate(request, cms_id = cms, password = password)
-#         if user is not None:
-#             form = login(request, user)
-#             messages.success(request, f' wecome {username} !!')
-#             print('logged in')
-#             return redirect('index')
-#         else:
-#             messages.info(request, f'account done not exit plz sign in')
-#             print('no logged in')
-#     form = AuthenticationForm()
-#     return render(request, 'login.html', {'form':form, 'title':'log in'})
 
 def SignUp(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('cms_id')
+            username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             ######################### mail system ####################################
-            htmly = get_template('Email.html')
-            d = { 'username': username }
-            subject, from_email, to = 'welcome', 'bhattiboy01@gmail.com', email
-            html_content = htmly.render(d)
-            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
+            # htmly = get_template('Email.html')
+            # d = { 'username': username }
+            # subject, from_email, to = 'welcome', 'bhattiboy01@gmail.com', email
+            # html_content = htmly.render(d)
+            # msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+            # msg.attach_alternative(html_content, "text/html")
+            # msg.send()
             ##################################################################
             messages.success(request, f'Your account has been created ! You are now able to log in')
             return redirect('login')
@@ -88,7 +63,7 @@ def LoginView(request):
 
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username == username, password == password)
+        user = authenticate(request, username = username, password = password)
         if user is not None:
             form = login(request, user)
             messages.success(request, f' welcome {username} !!')
