@@ -16,7 +16,7 @@ class User_Account(AbstractUser):
     contact_number = PhoneNumberField(default='+920000000000')
     # password = models.CharField(max_length=200)
     def __str__(self):
-        return f'{self.first_name} {self.last_name} {self.username}'
+        return f'{self.username}'
 
 class User_Event(models.Model):
     class Meta:

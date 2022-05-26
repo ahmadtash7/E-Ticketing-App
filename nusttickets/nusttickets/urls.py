@@ -14,23 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
-from .views import Index,Events, Tickets,SignUp,LoginView,LogoutView
+from django.urls import path, include
+from .views import Buy, Index, Events, Pay, Tickets, SignUp, LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
 
-
 urlpatterns = [
-path('accounts/', include('accounts.urls')),
-path('events/', include('events.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('events/', include('events.urls')),
     path('admin/', admin.site.urls),
-    path('', Index,name='index'),
+    path('', Index, name='index'),
     path('event/<str:oid>', Events, name='event'),
-path('ticketDetails/', Tickets, name='buy'),
-path('login/', LoginView, name='login'),
-path('logout/', LogoutView,name='logout'),
-path('signup/', SignUp, name='signup'),
+    path('ticketDetails/<str:oid>', Tickets, name='ticket'),
+    path('login/', LoginView, name='login'),
+    path('logout/', LogoutView, name='logout'),
+    path('signup/', SignUp, name='signup'),
+    path('buy/<str:oid>/', Buy, name='buy'),
+    path('pay/<str:oid>/', Pay, name='pay'),
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

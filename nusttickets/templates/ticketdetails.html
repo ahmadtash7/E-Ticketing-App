@@ -63,6 +63,10 @@ button{
   <td>EMAIL: {{current_user.email}}</td>
   <td></td>
 </TR>
+<TR>
+  <td>EVENT: {{event_data.name}}</td>
+  <td></td>
+</TR>
 </TABLE>
     </div>
 
@@ -72,9 +76,10 @@ button{
       <tr>
         <button type="button" onclick="">
 
-<a href="{% url 'signup' %}">ADD TO BAG</a>
+<a href="{% url 'buy' oid=event_data.name %}">Buy</a>
 
            </button>
+           <button type="button"><a>Reserve</a></button>
       </tr>
   </table>
 </div>

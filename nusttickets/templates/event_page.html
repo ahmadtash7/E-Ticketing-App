@@ -56,26 +56,50 @@
             <br />
             {{event_data.end_date}}
             <br />
-            {{event_data.ticket_price}}
+            Ticket Price: {{event_data.ticket_price}}
             <br />
-            {{event_data.tickets_left}}
+            Tickets Left: {{event_data.tickets_left}}
             <br />
           </p>
 
-          {% if user.is_authenticated %}
+
+{% if user_event_data.user_username == current_user.username and user_event_data.EventName == event_data.name %}
+<br />
+YOU HAVE ALREADY BOUGHT TICKETS FOR THIS EVENT
+<br />
+<button type="button" style="width: 50%; height: 50px" onclick="">
+  <a href="{% url 'index' %}">BACK TO HOME PAGE</a>
+</button>
+{% elif event_data.tickets_left < 1 %}
+
+<br />
+THERE ARE NO TICKETS LEFT FOR THIS EVENT
+<br />
+<button type="button" style="width: 50%; height: 50px" onclick="">
+  <a href="{% url 'index' %}">BACK TO HOME PAGE</a>
+</button>
+
+
+{% elif user.is_authenticated %}
           <button type="button" style="width: 50%; height: 50px" onclick="">
-            <a href="{% url 'buy' %}">BUY NOW</a>
+            <a href="{% url 'ticket' oid=event_data.name%}">BUY NOW</a>
           </button>
+
+
           {% else %}
           <button type="button" style="width: 50%; height: 50px" onclick="">
             <a href="{% url 'signup' %}">BUY NOW</a>
           </button>
 
-          {% endif %}
+
+
+
+
+{% endif %}
+
         </div>
       </div>
-
-      {% comment %} {% endfor %} {% endcomment %} {% endblock %}
+      {% endblock %}
     </div>
   </body>
 </html>
