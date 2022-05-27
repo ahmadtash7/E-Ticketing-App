@@ -2,6 +2,8 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from events.models import Event
 from django.contrib.auth.models import AbstractUser
+from datetime import date
+from django.utils.timezone import now
 
 # Create your models here.
 
@@ -24,6 +26,14 @@ class User_Event(models.Model):
 
     user_username = models.ForeignKey(User_Account,on_delete=models.CASCADE,to_field='username')
     EventName = models.ForeignKey(Event,on_delete=models.CASCADE,to_field='name')
+
+    BOUGHT = 'B'
+    RESERVED = 'R'
+
+    ue_choices = [(BOUGHT,'Bought'),(RESERVED,'RESERVED')]
+    date_bought = models.DateTimeField()
+
+    purchase_type = models.CharField(max_length=200,choices=ue_choices)
 
     def __str__(self):
         return f'{self.EventName} {self.user_username}'

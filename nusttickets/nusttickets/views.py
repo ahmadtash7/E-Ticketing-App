@@ -17,7 +17,7 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
-
+from datetime import datetime
 # Create your views here.
 
 
@@ -117,13 +117,21 @@ def Pay(request,oid):
     event_data.tickets_sold +=1
     event_data.save()
     current_user = request.user
-    user_event = User_Event(user_username=current_user,EventName=event_data)
+    user_event = User_Event(user_username=current_user,EventName=event_data,purchase_type='B',date_bought=datetime.now())
     user_event.save()
 
     return redirect('index')
 
 
-def Reserve(request):
+def Reserve(request,oid):
 
+    event_data = Event.objects.filter(name=oid).first()
+
+    event_data.tickets_left -= 1
+    event_data.tickets_sold +=1
+    event_data.save()
+    current_user = request.user
+    user_event = User_Event(user_username=current_user,EventName=event_data,purchase_type='R',date_bought=datetime.now())
+    user_event.save()
 
     return redirect('index')

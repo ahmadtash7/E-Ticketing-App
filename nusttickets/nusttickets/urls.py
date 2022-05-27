@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import Buy, Index, Events, Pay, Tickets, SignUp, LoginView, LogoutView
+from .views import Buy, Index, Events, Pay, Tickets, SignUp, LoginView, LogoutView,Reserve
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -33,5 +33,6 @@ urlpatterns = [
     path('signup/', SignUp, name='signup'),
     path('buy/<str:oid>/', Buy, name='buy'),
     path('pay/<str:oid>/', Pay, name='pay'),
+    path('reserve/<str:oid>/', Reserve, name='reserve'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

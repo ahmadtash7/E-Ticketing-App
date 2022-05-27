@@ -79,7 +79,7 @@ button{
 <a href="{% url 'buy' oid=event_data.name %}">Buy</a>
 
            </button>
-           <button type="button"><a>Reserve</a></button>
+           <button type="button"><a href="{% url 'reserve' oid=event_data.name %}">Reserve</a></button>
       </tr>
   </table>
 </div>
