@@ -29,19 +29,26 @@ def Index(request):
 
 def Events(request, oid):
     event_data = Event.objects.filter(name=oid).first()
-    current_user = request.user
-    user_event_data = User_Event.objects.filter(user_username=current_user.username).first()
+    ticket_bought = False
+    if request.user.is_authenticated:
+        current_user = request.user
+        user_event_data = User_Event.objects.filter(user_username=current_user.username).first()
 
-    print(user_event_data.user_username)
-    print(current_user.username)
+        if user_event_data is not None:
+            ticket_bought = str(current_user.username) == str(user_event_data.user_username) and str(event_data.name) == str(user_event_data.EventName)
+
+        else:
+            ticket_bought = False
+
+        print( ticket_bought)
+        return render(request, 'event_page.html', context={'event_data': event_data,
+         'ticket_bought':ticket_bought,})
 
 
-    print(user_event_data.EventName)
 
-    print(event_data.name)
-
-    return render(request, 'event_page.html', context={'event_data': event_data, 'user_event_data':user_event_data,'current_user': current_user})
-
+    else:
+        return render(request, 'event_page.html', context={'event_data': event_data,
+         })
 
 def Tickets(request,oid):
     event_data = Event.objects.filter(name=oid).first()

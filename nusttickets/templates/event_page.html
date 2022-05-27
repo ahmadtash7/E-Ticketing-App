@@ -60,10 +60,11 @@
             <br />
             Tickets Left: {{event_data.tickets_left}}
             <br />
+
           </p>
 
 
-{% if user_event_data.user_username == current_user.username and user_event_data.EventName == event_data.name %}
+{% if ticket_bought %}
 <br />
 YOU HAVE ALREADY BOUGHT TICKETS FOR THIS EVENT
 <br />
