@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% extends "base.html" %} {% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+      {% block content %}
+      {% comment %} {% for event in event_data %} {% endcomment %}
+      <div class="grid-container">
+        <div class="item1 font">{{event_data.name}}</div>
+        <div class="item2">
+          <img class="imgs" src="{{event_data.event_poster.url}}"  />
+        </div>
+        <div class="item3 font ">
+          <p class="dts">
+            {{event_data.start_date}}
+            <br />
+            {{event_data.end_date}}
+            <br />
+            Ticket Price: {{event_data.ticket_price}}
+            <br />
+            Tickets Left: {{event_data.tickets_left}}
+            <br />
+
+          </p>
+
+
+{% if ticket_bought %}
+<br />
+<div class="pp">
+YOU HAVE ALREADY BOUGHT TICKETS FOR THIS EVENT!
+</div>
+
+<button class="font buttons" type="button"style="margin-left:25%;margin-top:15px;" onclick="">
+  <a style="color:white ;" href="{% url 'index' %}">BACK TO HOME PAGE</a>
+</button>
+{% elif event_data.tickets_left < 1 %}
+
+<br />
+<div class="pp">
+YOU HAVE ALREADY BOUGHT TICKETS FOR THIS EVENT!
+</div>
+
+<button class="font buttons" type="button" onclick="" style="margin-left:25%;margin-top:5px;">
+  <a style="color:white ;" href="{% url 'index' %}">BACK TO HOME PAGE</a>
+</button>
+
+
+{% elif user.is_authenticated %}
+          <button class="buttons font" type="button" style="margin-left:25%;" onclick="">
+            <a  style="color:white ;" href="{% url 'ticket' oid=event_data.name%}">BUY NOW</a>
+          </button>
+
+
+          {% else %}
+          <button class="buttons font" type="button"onclick="" style="margin-left:25%;">
+            <a href="{% url 'signup' %}">BUY NOW</a>
+          </button>
+
+
+
+
+
+{% endif %}
+
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+  </body>
+</html>
