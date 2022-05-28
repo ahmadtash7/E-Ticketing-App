@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+{% load static %}
+
+<html>
+<head>
+<style>
+
+.item3 { grid-area: tick1; }
+.item4 { grid-area: menu2; }
+.item5 { grid-area: tick2; }
+.heading{
+  background-color:black;
+  color:white;
+  font-size:30px;
+  width:99%;
+  height:50px;
+}
+.grid-container {
+  display: grid;
+
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+</style>
+</head>
+<body>
+    {% block content %}
+<div class="tickdet" style="text-align:center;">
+    <h1 class="font">TICKET DETAILS</h1>
+<div class="font" style="margin-left:29%;font-size:30px;">
+  <TABLE>
+  <TR>
+    <td>NAME:{{current_user.first_name}} {{current_user.last_name}}</td>
+    <td></td>
+  </TR>
+  <TR>
+    <td>CMS: {{current_user.username}}</td>
+    <td></td>
+  </TR>
+  <TR>
+    <td>CONTACT:  {{current_user.contact_number}}</td>
+    <td></td>
+  </TR>
+  <TR>
+    <td>EMAIL: {{current_user.email}}</td>
+    <td></td>
+  </TR>
+  <TR>
+    <td>EVENT: {{event_data.name}}</td>
+    <td></td>
+  </TR>
+  </TABLE>
+</div>
+<div >
+  <table style="margin-left:50%;">
+      <tr>
+        <button class="buttons font"  type="button" style="margin-left:39%;margin-top:17px;padding:10px 40px 10px 40px" onclick="">
+
+<a style="color:white; font-size:25px;"href="{% url 'buy' oid=event_data.name %}">Buy</a>
+
+           </button>
+           <button class="buttons font "type="button" style="margin-top:17px;" ><a style="color:white; font-size:25px;" href="{% url 'reserve' oid=event_data.name %}">Reserve</a></button>
+      </tr>
+  </table>
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %} {% load static %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{% static '/css/master.css' %}">
+    <meta charset="utf-8" />
+    <title>HOME</title>
+  </head>
+  <body >
+    {% block content %}
+      <div class="main">
+       <aside class="left font">
+         {% for soc in society %}
+           <div class="form-check d-flex">
+             <input
+               class="form-check-input "
+               type="checkbox"
+               value=""
+               id="defaultCheck1"
+             />
+             <label style="color:white; font-weight:bold;font-size:18px;" class="form-check-label" for="defaultCheck1">
+               {{soc.society}}
+             </label>
+           </div>
+           {% endfor %}
+           <button class="buttons" style=" padding: 3px 8px;"type="submit" name="button">FILTER</button>
+       </aside>
+       <section >
+     <div class="row">
+
+    {% for event in events %}
+      <div class="col green-box">
+    {% comment %}
+    <p>{{event.event_poster.url}}</p>
+    {% endcomment %}
+    <div ><br>
+      <img class="mainmenu" src="{{event.event_poster.url}}" width="200px" height="220px"></div>
+    <div class="button">
+      <form action="" method="POST">
+        {% csrf_token %}
+         <h1 class="font disp1" style="font-size:30px; text-align: left;color:white;font-weight:bold;">{{event.name}}</h1>
+        <button class=" disp buttons" type="button" name="{{event.name}}">
+          <a style=" font-weight: bold; color:white;"href="{% url 'event' oid=event.name %}">View Details</a>
+        </button>
+      </form>
+    </div>
+
+  </div>
+    {% endfor %}
+</div>
+      </div>
+</section>
+{% endblock %}
+  </body>
+</html>
