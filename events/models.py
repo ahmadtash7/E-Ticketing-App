@@ -22,6 +22,10 @@ class Event(models.Model):
     tickets_left = models.IntegerField()
     ticket_price = models.IntegerField()
     event_poster = models.ImageField(default= settings.STATIC_URL+ 'images/down.jpg', upload_to='images/')
+    email_sent = models.BooleanField(default=False)
+
+    class Meta:
+        ordering =['start_date']
 
     def __str__(self):
         return f'{self.name}'

@@ -6,99 +6,76 @@
     <title></title>
   </head>
   <body>
-    <div class="container">
+    <div class="container ">
       {% block content %}
-      <style>
-        .item1 {
-          grid-area: header;
-        }
-        .item2 {
-          grid-area: image;
-        }
-        .item3 {
-          grid-area: info;
-        }
-
-        .heading {
-          background-color: black;
-          color: white;
-          font-size: 30px;
-          width: 99%;
-          height: 50px;
-        }
-        .grid-container {
-          display: grid;
-          grid-template-areas:
-            "header header header header header header"
-            "image image image info info info"
-            "image image image info info info";
-          gap: 10px;
-          background-color: #2196f3;
-          padding: 10px;
-        }
-
-        .grid-container > div {
-          background-color: rgba(255, 255, 255, 0.8);
-          text-align: center;
-          padding: 20px 0;
-          font-size: 30px;
-        }
-      </style>
       {% comment %} {% for event in event_data %} {% endcomment %}
-      <div class="grid-container">
-        <div class="item1">{{event_data.name}}</div>
-        <div class="item2">
-          <img src="{{event_data.event_poster.url}}" width:50% height:50% />
+      <div class="text-light row lead">
+        <div class="col-sm text-center my-4 display-5">{{event_data.name}}</div>
+        <div class="row">
+          <div class="col-sm">
+            <img class="w-100 p-3" src="{{event_data.event_poster.url}}"  />
+          </div>
+
+          <div class="col-sm" style="text-align:left">
+
+            <p >
+              <br>
+              EVENT START: {{event_data.start_date}}
+              <br />
+              EVENT END: {{event_data.end_date}}
+              <br />
+              TICKET PRICE (PKR): {{event_data.ticket_price}}
+              <br />
+              TICKETS LEFT: {{event_data.tickets_left}}
+              <br />
+              <br />
+              ORGANIZER: {{event_data.organizer}}
+              <br />
+            </p>
+
+
+          {% if ticket_bought %}
+          <br />
+          <div class="pp">
+          YOU HAVE ALREADY BOUGHT TICKETS FOR THIS EVENT!
+          </div>
+
+          {% comment %} <button class=" btn btn-primary" type="button"style="margin-left:25%;margin-top:15px;" onclick=""> {% endcomment %}
+          <a class="btn " style="color:white ;background-color:#B20600;" href="{% url 'index' %}">BACK TO HOME PAGE</a>
+          {% comment %} </button> {% endcomment %}
+          {% elif event_data.tickets_left < 1 %}
+
+          <br />
+          <div class="pp">
+          YOU HAVE ALREADY BOUGHT TICKETS FOR THIS EVENT!
+          </div>
+
+          {% comment %} <button class="btn btn-primary" type="button" onclick="" style="margin-left:25%;margin-top:5px;"> {% endcomment %}
+          <a class="btn  " style="color:white ;background-color:#B20600;" href="{% url 'index' %}">BACK TO HOME PAGE</a>
+          {% comment %} </button> {% endcomment %}
+
+
+          {% elif user.is_authenticated %}
+            {% comment %} <button class="btn btn-primary " type="button" style="margin-left:25%;" onclick=""> {% endcomment %}
+              <a class="btn  " style="color:white ;background-color:#B20600;" href="{% url 'ticket' oid=event_data.name%}">BUY NOW</a>
+            {% comment %} </button> {% endcomment %}
+
+
+            {% else %}
+            {% comment %} <button class="btn btn-primary" type="button"onclick="" style="color:purple"> {% endcomment %}
+              <a class="btn " style="color:white ;background-color:#B20600;" href="{% url 'signup' %}">BUY NOW</a>
+            {% comment %} </button> {% endcomment %}
+
+
+
+
+
+          {% endif %}
+
+          </div>
+
         </div>
-        <div class="item3">
-          <p>
-            {{event_data.start_date}}
-            <br />
-            {{event_data.end_date}}
-            <br />
-            Ticket Price: {{event_data.ticket_price}}
-            <br />
-            Tickets Left: {{event_data.tickets_left}}
-            <br />
 
-          </p>
-
-
-{% if ticket_bought %}
-<br />
-YOU HAVE ALREADY BOUGHT TICKETS FOR THIS EVENT
-<br />
-<button type="button" style="width: 50%; height: 50px" onclick="">
-  <a href="{% url 'index' %}">BACK TO HOME PAGE</a>
-</button>
-{% elif event_data.tickets_left < 1 %}
-
-<br />
-THERE ARE NO TICKETS LEFT FOR THIS EVENT
-<br />
-<button type="button" style="width: 50%; height: 50px" onclick="">
-  <a href="{% url 'index' %}">BACK TO HOME PAGE</a>
-</button>
-
-
-{% elif user.is_authenticated %}
-          <button type="button" style="width: 50%; height: 50px" onclick="">
-            <a href="{% url 'ticket' oid=event_data.name%}">BUY NOW</a>
-          </button>
-
-
-          {% else %}
-          <button type="button" style="width: 50%; height: 50px" onclick="">
-            <a href="{% url 'signup' %}">BUY NOW</a>
-          </button>
-
-
-
-
-
-{% endif %}
-
-        </div>
       </div>
       {% endblock %}
     </div>

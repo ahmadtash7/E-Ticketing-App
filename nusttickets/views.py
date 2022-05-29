@@ -34,6 +34,33 @@ import pytz
 #     p.save()
 
 
+def eventEmail():
+    new_events = Event.objects.filter(email_sent=False)
+    users = User_Account.objects.all()
+    for event in new_events:
+        # reservedUser = ticket.user_username
+        # User = User_Account.objects.filter(username=reservedUser.username).first()
+        for user in users:
+            # username = user.username
+            # first_name = User.first_name
+            # last_name = User.last_name
+            event_name = event.name
+            # contact = User.contact_number
+            email = user.email
+
+            htmly = get_template('newevent.html')
+            d = {'event_name': event_name}
+            subject, from_email, to = event_name + \
+                ' NEW EVENT', 'bhattiboy01@gmail.com', email
+            html_content = htmly.render(d)
+            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+        event.email_sent=True
+        event.save()
+
+
 def checkTicket():
     naive = datetime.now()
     utc = pytz.utc
@@ -50,7 +77,7 @@ def checkTicket():
             event.save()
             print(time_elapsed)
             ticket.delete()
-            
+
             reservedUser = ticket.user_username
             User = User_Account.objects.filter(username=reservedUser.username).first()
             username = User.username
@@ -72,8 +99,11 @@ def checkTicket():
 
 
 def Index(request):
+    
     checkTicket()
+    eventEmail()
     events = Event.objects.all()
+
     society = Organizer.objects.all()
     return render(request, 'index.html', context={'events': events, 'society': society})
 
