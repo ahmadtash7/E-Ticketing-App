@@ -31,3 +31,5 @@ class UserForm(ModelForm):
         if commit:
             user.save()
         return user
+
+# class FilterForm(forms.Form):
