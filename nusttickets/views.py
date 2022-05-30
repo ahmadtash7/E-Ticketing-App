@@ -19,33 +19,15 @@ from django.template.loader import get_template
 from django.template import Context
 from datetime import datetime, tzinfo, timedelta, timezone, time
 from django.core.mail import EmailMessage
-# import schedule
-# import time
-# from reportlab.pdfgen import canvas
 import pytz
-# Create your views here.
-
-# def makePdf(oid):
-#     current_user = request.user
-#     event_data = Event.objects.filter(name=oid).first()
-#     p = canvas.Canvas(username + '.pdf')
-#     p.drawString(200, 200, 'CMS: ' + current_user.username + '\nEvent: ' + event_data)
-#     p.showPage()
-#     p.save()
 
 
 def eventEmail():
     new_events = Event.objects.filter(email_sent=False)
     users = User_Account.objects.all()
     for event in new_events:
-        # reservedUser = ticket.user_username
-        # User = User_Account.objects.filter(username=reservedUser.username).first()
         for user in users:
-            # username = user.username
-            # first_name = User.first_name
-            # last_name = User.last_name
             event_name = event.name
-            # contact = User.contact_number
             email = user.email
 
             htmly = get_template('newevent.html')
@@ -98,8 +80,25 @@ def checkTicket():
             msg.send()
 
 
+def Base(request):
+    society = Organizer.objects.all()
+    return render(request, 'base.html', context={'society': society})
+
+def DeleteEvent():
+    naive = datetime.now()
+    utc = pytz.utc
+    gmt5 = pytz.timezone('Etc/GMT+5')
+    now = utc.localize(naive).astimezone(gmt5)
+    # reserved = User_Event.objects.filter(purchase_type='R')
+    events = Event.objects.all()
+    for event in events:
+        time_elapsed = now - event.end_date
+        if time_elapsed > timedelta(days=1):
+            event.delete()
+
+
 def Index(request):
-    
+    DeleteEvent()
     checkTicket()
     eventEmail()
     events = Event.objects.all()
@@ -129,9 +128,14 @@ def Events(request, oid):
                                                            'ticket_bought': ticket_bought, })
 
     else:
-        return render(request, 'event_page.html', context={'event_data': event_data,
-                                                           })
+        return render(request, 'event_page.html', context={'event_data': event_data})
 
+
+def SocietyEvent(request, oid):
+    event_data = Event.objects.filter(organizer=oid)
+    event_org = Organizer.objects.filter(society=oid).first()
+    society = Organizer.objects.all()
+    return render(request, 'society.html', context={'event_data': event_data, 'society': society,'event_org':event_org})
 
 def Tickets(request, oid):
     checkTicket()

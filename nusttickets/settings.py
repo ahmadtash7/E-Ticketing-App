@@ -140,7 +140,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS=True
 
-EMAIL_HOST_USER = 'zbhatti.bscs20seecs@seecs.edu.pk'
+EMAIL_HOST_USER = 'bhattiboy01@gmail.com'
 EMAIL_HOST_PASSWORD = 'Unhzm-2001'
 
 # LOG
