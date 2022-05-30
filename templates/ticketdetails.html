@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+{% load static %}
+
+<html>
+<head>
+
+</head>
+<body>
+    {% block content %}
+<div class="text-light text-center my-5" >
+    <h1 class="display-6">TICKET DETAILS</h1>
+<div class="text-left lead" >
+<br>
+    NAME:{{current_user.first_name}} {{current_user.last_name}}
+<br>
+    CMS: {{current_user.username}}
+<br>
+    CONTACT:  {{current_user.contact_number}}
+<br>
+    EMAIL: {{current_user.email}}
+<br>
+    EVENT: {{event_data.name}}
+<br>
+<a class="btn my-4" style="color:white;background-color:#B20600;"href="{% url 'buy' oid=event_data.name %}">Buy</a>
+
+
+<a class="btn my-4" style="color:white;background-color:#B20600;"href="{% url 'reserve' oid=event_data.name %}">Reserve</a>
+
+</div>
+
+</div>
+{% endblock %}
+</body>
+</html>

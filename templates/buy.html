@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+{% block content %}
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="text-center my-5">
+
+<p class="display-6 text-light text-center">SELECT PAYMENT METHOD</p>
+  <a class="btn "style="color:white ;background-color:#B20600;" href="{% url 'pay' oid=event_data.name %}">Pay</a>
+</div>
+
+{% endblock %}

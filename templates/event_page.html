@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends "base.html" %} {% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div class="container ">
+      {% block content %}
+      {% comment %} {% for event in event_data %} {% endcomment %}
+      <div class="text-light row lead">
+        <div class="col-sm text-center my-4 display-5">{{event_data.name}}</div>
+        <div class="row">
+          <div class="col-sm">
+            <img class="w-100 p-3" src="{{event_data.event_poster.url}}"  />
+          </div>
+
+          <div class="col-sm" style="text-align:left">
+
+            <p >
+              <br>
+              EVENT START: {{event_data.start_date}}
+              <br />
+              EVENT END: {{event_data.end_date}}
+              <br />
+              TICKET PRICE (PKR): {{event_data.ticket_price}}
+              <br />
+              TICKETS LEFT: {{event_data.tickets_left}}
+              <br />
+              <br />
+              ORGANIZER: {{event_data.organizer}}
+              <br />
+            </p>
+
+
+          {% if ticket_bought %}
+          <br />
+          <div class="pp">
+          YOU HAVE ALREADY BOUGHT TICKETS FOR THIS EVENT!
+          </div>
+
+          {% comment %} <button class=" btn btn-primary" type="button"style="margin-left:25%;margin-top:15px;" onclick=""> {% endcomment %}
+          <a class="btn " style="color:white ;background-color:#B20600;" href="{% url 'index' %}">BACK TO HOME PAGE</a>
+          {% comment %} </button> {% endcomment %}
+          {% elif event_data.tickets_left < 1 %}
+
+          <br />
+          <div class="pp">
+          YOU HAVE ALREADY BOUGHT TICKETS FOR THIS EVENT!
+          </div>
+
+          {% comment %} <button class="btn btn-primary" type="button" onclick="" style="margin-left:25%;margin-top:5px;"> {% endcomment %}
+          <a class="btn  " style="color:white ;background-color:#B20600;" href="{% url 'index' %}">BACK TO HOME PAGE</a>
+          {% comment %} </button> {% endcomment %}
+
+
+          {% elif user.is_authenticated %}
+            {% comment %} <button class="btn btn-primary " type="button" style="margin-left:25%;" onclick=""> {% endcomment %}
+              <a class="btn  " style="color:white ;background-color:#B20600;" href="{% url 'ticket' oid=event_data.name%}">BUY NOW</a>
+            {% comment %} </button> {% endcomment %}
+
+
+            {% else %}
+            {% comment %} <button class="btn btn-primary" type="button"onclick="" style="color:purple"> {% endcomment %}
+              <a class="btn " style="color:white ;background-color:#B20600;" href="{% url 'signup' %}">BUY NOW</a>
+            {% comment %} </button> {% endcomment %}
+
+
+
+
+
+          {% endif %}
+
+          </div>
+
+        </div>
+
+      </div>
+      {% endblock %}
+    </div>
+  </body>
+</html>

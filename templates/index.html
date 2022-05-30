@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %} {% load static %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>HOME</title>
+  </head>
+  <body>
+    {% block content %}
+      <div class="container-fluid">
+        <h1 class="display-6 text-center text-light my-3">EVENTS CURRENTLY HAPPENING IN NUST</h1>
+        <div class="row">
+          <div class="col-sm-2" style="height:450px;overflow-y:scroll;">
+            <h2 class="lead text-center text-light">FILTER BY SOCIETY</h2>
+            <div>
+              <table>
+              {% for soc in society %}
+                <tr>
+                  <td>
+                  <a href="{% url 'society' oid=soc %}">
+                  <button type="button" class="btn text-white my-1" style="background-color:#B20600; width:100%" >
+                    {{soc.society}}
+                  </button>
+                </a>
+              </td>
+            </tr>
+                </div>
+                {% endfor %}
+              </table>
+               </div>
+          </div>
+          <div class="col-sm">
+       
+     <div class="row">
+
+    {% for event in events %}
+      <div class="col-sm-4">
+    <div class="text-center "><a class="text-center " style="  color:white;" href="{% url 'event' oid=event.name %}"><br>
+      <img class="rounded " src="{{event.event_poster.url}}" width="200px" height="220px"></div>
+    <div class="">
+      <form action="" method="POST">
+        {% csrf_token %}
+         <button type="button" class=" btn text-white my-3" style="background-color:#B20600;">{{event.name}}</button>
+      </form>
+      </a>
+    </div>
+
+  </div>
+    {% endfor %}
+</div>
+<br>
+<br>
+</div>
+{% endblock %}
+  </body>
+</html>

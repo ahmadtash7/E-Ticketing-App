@@ -1,0 +1,162 @@
+
+*{
+  box-sizing: border-box;
+}
+body
+{
+  margin:0px;
+  padding:0px;
+}
+.main{
+  margin:10px 0px;
+}
+/* .main *{
+  border-radius: 10px;
+} */
+section{
+  margin-top: 2%;
+  width:79%;
+  float:left;
+  height:auto;
+  background-color: #0B0B45;
+  margin-left:1%;
+  /* border-radius: 20px; */
+  box-shadow: 0 0 10px 1px white;
+  padding-left: 45px;
+}
+
+.left{
+  margin-top: 2%;
+  width:19%;
+  float:left;
+  height: 100%;
+  margin-right: 1%;
+  /* border-radius: 10px; */
+ background-color: #0B0B45;
+ box-shadow: 0 0 10px 2px white;
+ padding-left: 13px;
+ padding-top: 5px;
+ padding-bottom: 5px;
+}
+.buttons {
+  transition-duration: 0.4s;
+  background-color: #BA55D3;
+  border: none;
+ color: white;
+ padding: 10px 25px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ font-size: 20px;
+ cursor: pointer;
+ float: left;
+/* border-radius: 10px; */
+ margin-left: 6px;
+ /* font-weight: bold; */
+  /* font-family: "Times New Roman", Times, serif; */
+}
+
+.buttons:hover {
+  background-color: #4B0082;
+  border-color: white;
+  /* box-shadow: 0 0 10px 2px white; */
+}
+
+/* .buttons{
+  width:50px;
+  height:20%;
+} */
+.footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+
+}
+.font{
+   /* font-family: "Times New Roman", Times, serif; */
+   color:white;
+}
+.font1{
+  color:white;
+  font-size:28px;
+}
+.disp{
+  margin-left: 12%;
+}
+.disp1{
+  margin-left: 10%;
+  text-align: center;
+}
+.logo{
+  /* display: block; */
+  margin-top: 10px;
+ margin-left: 0%;
+ margin-right: 0%;
+ width: 100%;
+ height: auto;
+ font-size: 70px;
+ /* font-family: 'Libre Barcode 39'; */
+ color:white;
+}
+.mainmenu{
+   box-shadow: 2px 2px 2px 2px black;
+  border-radius: 10px;
+}
+
+
+.item1 {
+  grid-area: header;
+}
+.item2 {
+  grid-area: image;
+}
+.item3 {
+  grid-area: info;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "header header header header header header"
+    "image image image info info info"
+    "image image image info info info";
+  gap: 12px;
+  background-color: #0B0B45;
+  padding: 10px ;
+  color:white;
+  margin-top: 20px;
+  border:1px solid white;
+    box-shadow: 0 0 10px 2px white;
+}
+
+.grid-container > div {
+  text-align: center;
+  padding: 10px 10px;
+  font-size: 40px;
+  /* font-weight:bold; */
+  border-color: white;
+}
+.imgs{
+  width: 400px;
+  height: 380px;
+  box-shadow: 2px 2px 2px 2px black;
+
+}
+.dts{
+  font-size:35px;
+  text-align: center;
+  margin-right: 17%;
+}
+.pp{
+  border: 1px solid aqua;
+    box-shadow: 0 0 10px 2px white;
+  border-radius: 15px;
+  font-size: 25px;
+}
+.tickdet{
+  border:1px solid white;
+    box-shadow: 0 0 10px 2px white;
+}
